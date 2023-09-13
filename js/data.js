@@ -398,3 +398,5 @@ function closeSidebar() {
 }
 
 loadItems();
+
+// Continue soon
