@@ -1,0 +1,37 @@
+.status {
+  width: 120px;
+  padding: 10px 0;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  .circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  &.paid {
+    background-color: var(--bg-green);
+    color: var(--green);
+    .circle {
+      background-color: var(--green);
+    }
+  }
+  &.pending {
+    background-color: var(--bg-orange);
+    color: var(--orange);
+    .circle {
+      background-color: var(--orange);
+    }
+  }
+  &.draft {
+    background-color: var(--bg-white);
+    color: var(--primary-text);
+    .circle {
+      background-color: var(--primary-text);
+    }
+  }
+}

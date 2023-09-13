@@ -1,0 +1,22 @@
+.sunSvg {
+  fill: #858bb2;
+  transition: 0.1s;
+}
+.moonSvg {
+  fill: #7e88c3;
+  transition: 0.1s;
+}
+.theme {
+  &__svg {
+    display: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    &.show {
+      display: block;
+    }
+    &:hover {
+      fill: #fff;
+    }
+  }
+}

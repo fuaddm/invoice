@@ -1,0 +1,19 @@
+.exit {
+  position: absolute;
+  background-color: #1e2139;
+  color: #fff;
+  font-size: 16px;
+  padding: 20px 60px;
+  border-radius: 8px;
+  text-align: center;
+  white-space: nowrap;
+  display: none;
+  cursor: pointer;
+  &.show {
+    display: block;
+  }
+  &:hover {
+    color: var(--purple);
+    text-decoration: underline;
+  }
+}

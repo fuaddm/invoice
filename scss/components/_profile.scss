@@ -1,0 +1,13 @@
+.profile {
+  user-select: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  &__picture {
+    width: 100%;
+  }
+}

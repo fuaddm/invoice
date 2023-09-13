@@ -1,0 +1,48 @@
+@use "../components/profile";
+@use "../components/theme";
+@use "../components/exit";
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+  background-color: #252945;
+  &__logo {
+    height: 72px;
+    width: 72px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: var(--purple);
+  }
+  &__control {
+    display: flex;
+    height: 100%;
+    &__item {
+      padding: 0 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:first-child {
+        border-right: 1px solid #494e6e;
+      }
+      &:last-child {
+        position: relative;
+        cursor: pointer;
+        .exit {
+          bottom: 20px;
+          left: 70px;
+          transform: translate(-100%, 100%);
+        }
+        &:hover .profile {
+          border: 3px solid var(--purple);
+        }
+      }
+    }
+  }
+}
