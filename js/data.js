@@ -279,6 +279,7 @@ paidBtn.addEventListener("click", () => {
 
 function loadLocalStorage(data) {
   if (localStorage.getItem("data") == null) {
+    localStorage.setItem("data", JSON.stringify(data));
   } else {
     let localData = JSON.parse(localStorage.getItem("data"));
     let setData = JSON.stringify(localData.concat(data));
@@ -287,12 +288,16 @@ function loadLocalStorage(data) {
 }
 
 function getLocalStorage() {
-  let data = JSON.parse(localStorage.getItem("data"));
-  return data;
+  if (localStorage.getItem("data") == null) {
+    return [];
+  } else {
+    let data = JSON.parse(localStorage.getItem("data"));
+    return data;
+  }
 }
 
 function loadItems() {
-  let data = JSON.parse(localStorage.getItem("data"));
+  let data = getLocalStorage();
   let body = document.querySelector(".main__body");
   body.innerHTML = "";
   data.forEach((item) => {
