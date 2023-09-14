@@ -26,6 +26,7 @@ const goBack = document.querySelector(".item__goback");
 const openEditBtn = document.querySelector(".item__header__editBtn");
 const deleteBtn = document.querySelector(".item__header__deleteBtn");
 const paidBtn = card.querySelector(".item__header__paidBtn");
+const sidebarInputsWrapper = document.querySelector(".sidebar__inputs__wrapper");
 
 draftBtn.addEventListener("click", () => {
   const items = document.querySelectorAll(".sidebar__group2");
@@ -39,6 +40,7 @@ draftBtn.addEventListener("click", () => {
     arr.push(obj);
   });
   let data = {
+    id: generateId(),
     userStreet: userStreet.value,
     userCity: userCity.value,
     userPostcode: userPostcode.value,
@@ -65,7 +67,10 @@ addBtn.addEventListener("click", () => {
   newItem.className = "sidebar__group2";
   newItem.innerHTML = `
 <div class="sidebar__label">
-  <div class="sidebar__label__text">Item Name</div>
+<div class="sidebar__label__header">
+<div class="sidebar__label__text">Item name</div>
+<div class="sidebar__label__err">can't be empty</div>
+</div>
   <input type="text" value="New Item" class="sidebar__input itemName" />
 </div>
 <div class="sidebar__label">
@@ -115,6 +120,7 @@ saveBtn.addEventListener("click", () => {
     arr.push(obj);
   });
   let data = {
+    id: generateId(),
     userStreet: userStreet.value,
     userCity: userCity.value,
     userPostcode: userPostcode.value,
@@ -130,9 +136,13 @@ saveBtn.addEventListener("click", () => {
     status: "pending",
     items: arr,
   };
-  loadLocalStorage([data]);
-  loadItems();
-  closeSidebar();
+  if (checkForm("pending")) {
+    loadLocalStorage([data]);
+    loadItems();
+    closeSidebar();
+  } else {
+    console.log("Can't");
+  }
 });
 
 cancelBtn.addEventListener("click", () => {
@@ -167,18 +177,23 @@ editBtn.addEventListener("click", () => {
     date: new Date().toLocaleDateString(),
     items: arr,
   };
+  let status;
+  let idText = card.querySelector(".item__card__header__code__id");
   localData = localData.map((item) => {
-    if (item.projectDesc == data.projectDesc) {
+    if (item.id == idText.textContent) {
+      status = item.status;
       return { ...item, ...data };
     }
     return item;
   });
-  localStorage.setItem("data", JSON.stringify(localData));
-
-  loadItems();
-
-  loadCard(localData.find((it) => it.projectDesc == data.projectDesc));
-  closeSidebar();
+  if (checkForm(status)) {
+    localStorage.setItem("data", JSON.stringify(localData));
+    loadItems();
+    loadCard(localData.find((it) => it.projectDesc == data.projectDesc));
+    closeSidebar();
+  } else {
+    console.log("Can't");
+  }
 });
 
 goBack.addEventListener("click", () => {
@@ -187,9 +202,9 @@ goBack.addEventListener("click", () => {
 });
 
 deleteBtn.addEventListener("click", () => {
-  let name = card.querySelector(".itemName");
+  let idText = card.querySelector(".item__card__header__code__id");
   let data = JSON.parse(localStorage.getItem("data"));
-  data = data.filter((it) => it.projectDesc != name.textContent);
+  data = data.filter((it) => it.id != idText.textContent);
   localStorage.setItem("data", JSON.stringify(data));
   loadItems();
   mainWrapper.classList.remove("hidden");
@@ -197,14 +212,13 @@ deleteBtn.addEventListener("click", () => {
 });
 
 openEditBtn.addEventListener("click", () => {
-  projectDesc.setAttribute("disabled", "true");
   buttons.classList.add("hidden");
   buttons2.classList.remove("hidden");
   sidebar.style.left = "0";
   bgc.style.display = "block";
-  let name = card.querySelector(".itemName");
+  let idText = card.querySelector(".item__card__header__code__id");
   let data = JSON.parse(localStorage.getItem("data"));
-  let item = data.find((it) => it.projectDesc == name.textContent);
+  let item = data.find((it) => it.id == idText.textContent);
   userStreet.value = item.userStreet;
   userCity.value = item.userCity;
   userPostcode.value = item.userPostcode;
@@ -263,10 +277,10 @@ openEditBtn.addEventListener("click", () => {
 });
 
 paidBtn.addEventListener("click", () => {
-  let name = card.querySelector(".itemName");
+  let idText = card.querySelector(".item__card__header__code__id");
   let data = JSON.parse(localStorage.getItem("data"));
   data = data.map((it) => {
-    if (it.projectDesc == name.textContent) {
+    if (it.id == idText.textContent) {
       it.status = "paid";
       return it;
     }
@@ -274,7 +288,7 @@ paidBtn.addEventListener("click", () => {
   });
   localStorage.setItem("data", JSON.stringify(data));
   loadItems();
-  loadCard(data.find((it) => it.projectDesc == name.textContent));
+  loadCard(data.find((it) => it.id == idText.textContent));
 });
 
 function loadLocalStorage(data) {
@@ -309,7 +323,7 @@ function loadItems() {
     bodyItem.className = "main__body__item";
     bodyItem.innerHTML = `
                 <div class="main__body__item-1">
-                  <div class="main__body__item__code"><span class="main__body__item__code__yes">#</span>KL9021</div>
+                  <div class="main__body__item__code"><span class="main__body__item__code__yes">#</span>${item.id}</div>
                   <div class="main__body__item__date">${item.date}</div>
                 </div>
                 <div class="main__body__item-2">
@@ -340,6 +354,8 @@ function loadCard(item) {
     return sum;
   }, 0);
   let status = card.querySelector(".status");
+  let idText = card.querySelector(".item__card__header__code__id");
+  idText.textContent = item.id;
   let statusText = status.querySelector("span");
   status.classList.remove("paid");
   status.classList.remove("draft");
@@ -384,12 +400,29 @@ function loadCard(item) {
   item.items.forEach((item) => {
     let element = `<div class="item__card__footer__item__name start">${item.name}</div>
         <div class="item__card__footer__item__other">${item.qty}</div>
-        <div class="item__card__footer__item__other">${item.price}</div>
+        <div class="item__card__footer__item__other">$${item.price}</div>
         <div class="item__card__footer__item__other darkColor">$${(item.qty * item.price).toFixed(2)}</div>`;
     items.innerHTML += element;
   });
   let totalPrice = card.querySelector(".TotalPrice");
   totalPrice.textContent = `$${total.toFixed(2)}`;
+}
+
+function checkForm(status) {
+  if (status != "draft") {
+    let inputs = sidebarInputsWrapper.querySelectorAll('input[type="text"],input[type="email"]');
+    let isInputsFull = true;
+    inputs.forEach((item) => {
+      if (item.value == "") {
+        item.previousElementSibling?.querySelector(".sidebar__label__err")?.classList.add("show");
+        isInputsFull = false;
+      } else {
+        item.previousElementSibling?.querySelector(".sidebar__label__err")?.classList.remove("show");
+      }
+    });
+    return isInputsFull;
+  }
+  return true;
 }
 
 function closeSidebar() {
@@ -398,5 +431,42 @@ function closeSidebar() {
 }
 
 loadItems();
+
+function generateId() {
+  function generateString(length) {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let result = "";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result.toUpperCase();
+  }
+
+  function generateNumber(length) {
+    const characters = "0123456789";
+    let result = "";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+  let result = generateString(2) + generateNumber(4);
+
+  let data = localStorage.getItem("data");
+  if (data != null) {
+    data = JSON.parse(data);
+    data.forEach((x) => {
+      if (x.id == result) {
+        result = generateId();
+      }
+    });
+  }
+
+  return result;
+}
 
 // Continue soon

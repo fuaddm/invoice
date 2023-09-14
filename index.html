@@ -87,7 +87,10 @@
         <div class="item__card">
           <div class="item__card__header">
             <div class="item__card__header__flex">
-              <div class="item__card__header__code"><span class="item__card__header__code__yes">#</span>RT3080</div>
+              <div class="item__card__header__code">
+                <span class="item__card__header__code__yes">#</span
+                ><span class="item__card__header__code__id">RT3070</span>
+              </div>
               <div class="item__card__light-text itemName">Re-branding</div>
             </div>
             <div class="item__card__header__flex">
@@ -138,57 +141,90 @@
       </div>
       <div class="sidebar">
         <div class="sidebar__title">New Invoice</div>
-        <div class="sidebar__flex">
+        <div class="sidebar__flex sidebar__inputs__wrapper">
           <div class="sidebar__title2">Bill From</div>
-          <label for="userStreet" class="sidebar__label">
-            <div class="sidebar__label__text">Street Address</div>
+          <div class="sidebar__label">
+            <div class="sidebar__label__header">
+              <label for="userStreet" class="sidebar__label__text">Street Address</label>
+              <div class="sidebar__label__err">can't be empty</div>
+            </div>
             <input type="text" class="sidebar__input" id="userStreet" />
-          </label>
+          </div>
           <div class="sidebar__group">
-            <label for="userCity" class="sidebar__label">
-              <div class="sidebar__label__text">City</div>
+            <div class="sidebar__label">
+              <div class="sidebar__label__header">
+                <label for="userCity" class="sidebar__label__text">City</label>
+                <div class="sidebar__label__err">can't be empty</div>
+              </div>
               <input type="text" class="sidebar__input" id="userCity" />
-            </label>
-            <label for="userPostcode" class="sidebar__label">
-              <div class="sidebar__label__text">Post Code</div>
+            </div>
+            <div class="sidebar__label">
+              <div class="sidebar__label__header">
+                <label for="userPostcode" class="sidebar__label__text">Post code</label>
+                <div class="sidebar__label__err">can't be empty</div>
+              </div>
               <input type="text" class="sidebar__input" id="userPostcode" />
-            </label>
-            <label for="userCountry" class="sidebar__label">
-              <div class="sidebar__label__text">Country</div>
+            </div>
+            <div class="sidebar__label">
+              <div class="sidebar__label__header">
+                <label for="userCountry" class="sidebar__label__text">Country</label>
+                <div class="sidebar__label__err">can't be empty</div>
+              </div>
               <input type="text" class="sidebar__input" id="userCountry" />
-            </label>
+            </div>
           </div>
           <div class="sidebar__title2">Bill To</div>
-          <label for="clientName" class="sidebar__label">
-            <div class="sidebar__label__text">Client's Name</div>
+          <div class="sidebar__label">
+            <div class="sidebar__label__header">
+              <label for="clientName" class="sidebar__label__text">Client's name</label>
+              <div class="sidebar__label__err">can't be empty</div>
+            </div>
             <input type="text" class="sidebar__input" id="clientName" />
-          </label>
-          <label for="clientEmail" class="sidebar__label">
-            <div class="sidebar__label__text">Client's Email</div>
-            <input type="email" class="sidebar__input" id="clientEmail" />
-          </label>
-          <label for="clientStreet" class="sidebar__label">
-            <div class="sidebar__label__text">Street Address</div>
-            <input type="text" class="sidebar__input" id="clientStreet" />
-          </label>
-          <div class="sidebar__group">
-            <label for="clientCity" class="sidebar__label">
-              <div class="sidebar__label__text">City</div>
-              <input type="text" class="sidebar__input" id="clientCity" />
-            </label>
-            <label for="clientPostcode" class="sidebar__label">
-              <div class="sidebar__label__text">Post Code</div>
-              <input type="text" class="sidebar__input" id="clientPostcode" />
-            </label>
-            <label for="clientCountry" class="sidebar__label">
-              <div class="sidebar__label__text">Country</div>
-              <input type="text" class="sidebar__input" id="clientCountry" />
-            </label>
           </div>
-          <label for="projectDesc" class="sidebar__label">
-            <div class="sidebar__label__text">Project Description</div>
+          <div class="sidebar__label">
+            <div class="sidebar__label__header">
+              <label for="clientEmail" class="sidebar__label__text">Client's email</label>
+              <div class="sidebar__label__err">can't be empty</div>
+            </div>
+            <input type="email" class="sidebar__input" id="clientEmail" />
+          </div>
+          <div class="sidebar__label">
+            <div class="sidebar__label__header">
+              <label for="clientStreet" class="sidebar__label__text">Street address</label>
+              <div class="sidebar__label__err">can't be empty</div>
+            </div>
+            <input type="text" class="sidebar__input" id="clientStreet" />
+          </div>
+          <div class="sidebar__group">
+            <div class="sidebar__label">
+              <div class="sidebar__label__header">
+                <label for="clientCity" class="sidebar__label__text">City</label>
+                <div class="sidebar__label__err">can't be empty</div>
+              </div>
+              <input type="text" class="sidebar__input" id="clientCity" />
+            </div>
+            <div class="sidebar__label">
+              <div class="sidebar__label__header">
+                <label for="clientPostcode" class="sidebar__label__text">Post code</label>
+                <div class="sidebar__label__err">can't be empty</div>
+              </div>
+              <input type="text" class="sidebar__input" id="clientPostcode" />
+            </div>
+            <div class="sidebar__label">
+              <div class="sidebar__label__header">
+                <label for="clientCountry" class="sidebar__label__text">Country</label>
+                <div class="sidebar__label__err">can't be empty</div>
+              </div>
+              <input type="text" class="sidebar__input" id="clientCountry" />
+            </div>
+          </div>
+          <div class="sidebar__label">
+            <div class="sidebar__label__header">
+              <label for="projectDesc" class="sidebar__label__text">Project Description</label>
+              <div class="sidebar__label__err">can't be empty</div>
+            </div>
             <input type="text" class="sidebar__input" id="projectDesc" />
-          </label>
+          </div>
           <div class="sidebar__title3">Item List</div>
           <div class="sidebar__group2__wrapper"></div>
           <div class="sidebar__addBtn">

@@ -19,6 +19,20 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__err {
+      font-size: 12px;
+      font-weight: 300;
+      color: tomato;
+      display: none;
+      &.show {
+        display: block;
+      }
+    }
     &__text {
       font-weight: 300;
       font-size: 14px;

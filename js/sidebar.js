@@ -7,7 +7,6 @@ const invoices = document.querySelectorAll(".main__body__item");
 btn.addEventListener("click", () => {
   buttons.classList.remove("hidden");
   buttons2.classList.add("hidden");
-  projectDesc.removeAttribute("disabled");
   sidebar.style.left = "0";
   bgc.style.display = "block";
   userStreet.value = "";
@@ -27,7 +26,10 @@ btn.addEventListener("click", () => {
   newItem.className = "sidebar__group2";
   newItem.innerHTML = `
 <div class="sidebar__label">
-  <div class="sidebar__label__text">Item Name</div>
+<div class="sidebar__label__header">
+<div class="sidebar__label__text">Item name</div>
+<div class="sidebar__label__err">can't be empty</div>
+</div>
   <input type="text" value="New Item" class="sidebar__input itemName" />
 </div>
 <div class="sidebar__label">

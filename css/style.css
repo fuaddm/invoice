@@ -293,6 +293,20 @@ h6 {
   flex-direction: column;
   gap: 12px;
 }
+.sidebar__label__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sidebar__label__err {
+  font-size: 12px;
+  font-weight: 300;
+  color: tomato;
+  display: none;
+}
+.sidebar__label__err.show {
+  display: block;
+}
 .sidebar__label__text {
   font-weight: 300;
   font-size: 14px;
@@ -654,6 +668,7 @@ body {
   display: flex;
   gap: 14px;
   align-items: center;
+  width: min-content;
   cursor: pointer;
 }
 .item__goback svg {
@@ -664,6 +679,10 @@ body {
 .item__goback span {
   font-size: 16px;
   font-weight: 600;
+  white-space: nowrap;
+}
+.item__goback:hover span {
+  color: #b1b1b1;
 }
 .item__header {
   display: flex;
