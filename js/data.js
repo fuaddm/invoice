@@ -325,6 +325,8 @@ function getLocalStorage() {
 
 function loadItems(status = ["paid", "pending", "draft"]) {
   let data = getLocalStorage();
+  let headerText = document.querySelector(".main__header__info__subtitle");
+  headerText.textContent = `There are ${data.length} total invoices`;
   let body = document.querySelector(".main__body");
   body.innerHTML = "";
   data.forEach((item) => {
