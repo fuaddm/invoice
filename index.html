@@ -53,7 +53,25 @@
               <span class="main__header__info__subtitle">There are 7 total invoices</span>
             </div>
             <div class="main__header__control">
-              <div class="main__header__control__select">Filter by status</div>
+              <div class="main__header__control__select">
+                <div class="main__header__control__select__header">Filter by status</div>
+                <div class="main__header__control__select__body">
+                  <label class="main__header__control__select__body__item">
+                    <input type="checkbox" class="main__header__control__select__body__item__checkbox draftCheckbox" />
+                    <div class="main__header__control__select__body__item__name">Draft</div>
+                  </label>
+                  <label class="main__header__control__select__body__item">
+                    <input
+                      type="checkbox"
+                      class="main__header__control__select__body__item__checkbox pendingCheckbox" />
+                    <div class="main__header__control__select__body__item__name">Pending</div>
+                  </label>
+                  <label class="main__header__control__select__body__item">
+                    <input type="checkbox" class="main__header__control__select__body__item__checkbox paidCheckbox" />
+                    <div class="main__header__control__select__body__item__name">Paid</div>
+                  </label>
+                </div>
+              </div>
               <div class="main__header__control__btn">
                 <div class="main__header__control__btn__plus"></div>
                 <span class="main__header__control__btn__text">New <span>Invoice</span></span>

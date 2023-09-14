@@ -548,7 +548,44 @@ body {
 .main__header__control {
   display: flex;
   align-items: center;
+  gap: 32px;
+}
+.main__header__control__select {
+  position: relative;
+}
+.main__header__control__select__header {
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-text);
+  cursor: pointer;
+}
+.main__header__control__select__body {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 20px);
+  right: 0;
+  background-color: var(--btn-bg-2);
+  border-radius: 6px;
+  padding: 20px;
+  padding-right: 70px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  display: none;
+  flex-direction: column;
   gap: 10px;
+}
+.main__header__control__select__body.show {
+  display: flex;
+}
+.main__header__control__select__body__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.main__header__control__select__body__item__name {
+  font-weight: 700;
+  font-size: 14px;
 }
 .main__header__control__btn {
   display: flex;

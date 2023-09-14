@@ -27,6 +27,9 @@ const openEditBtn = document.querySelector(".item__header__editBtn");
 const deleteBtn = document.querySelector(".item__header__deleteBtn");
 const paidBtn = card.querySelector(".item__header__paidBtn");
 const sidebarInputsWrapper = document.querySelector(".sidebar__inputs__wrapper");
+const filterBtn = document.querySelector(".main__header__control__select__header");
+const filterBody = document.querySelector(".main__header__control__select__body");
+const filterItems = document.querySelectorAll(".main__header__control__select__body__item");
 
 draftBtn.addEventListener("click", () => {
   const items = document.querySelectorAll(".sidebar__group2");
@@ -291,6 +294,16 @@ paidBtn.addEventListener("click", () => {
   loadCard(data.find((it) => it.id == idText.textContent));
 });
 
+filterBtn.addEventListener("click", () => {
+  filterBody.classList.toggle("show");
+});
+
+filterItems.forEach((filterItem) => {
+  filterItem.addEventListener("click", () => {
+    checkStatus();
+  });
+});
+
 function loadLocalStorage(data) {
   if (localStorage.getItem("data") == null) {
     localStorage.setItem("data", JSON.stringify(data));
@@ -310,7 +323,7 @@ function getLocalStorage() {
   }
 }
 
-function loadItems() {
+function loadItems(status = ["paid", "pending", "draft"]) {
   let data = getLocalStorage();
   let body = document.querySelector(".main__body");
   body.innerHTML = "";
@@ -344,7 +357,11 @@ function loadItems() {
       card.classList.add("show");
       loadCard(item);
     });
-    body.append(bodyItem);
+    status.forEach((x) => {
+      if (x == item.status) {
+        body.append(bodyItem);
+      }
+    });
   });
 }
 
@@ -467,6 +484,27 @@ function generateId() {
   }
 
   return result;
+}
+
+function checkStatus() {
+  let arr = [];
+  const draftCheckbox = document.querySelector(".draftCheckbox");
+  const pendingCheckbox = document.querySelector(".pendingCheckbox");
+  const paidCheckbox = document.querySelector(".paidCheckbox");
+  if (draftCheckbox.checked) {
+    arr.push("draft");
+  }
+  if (pendingCheckbox.checked) {
+    arr.push("pending");
+  }
+  if (paidCheckbox.checked) {
+    arr.push("paid");
+  }
+  if (arr.length == 0) {
+    loadItems();
+  } else {
+    loadItems(arr);
+  }
 }
 
 // Continue soon
