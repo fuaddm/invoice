@@ -61,7 +61,7 @@ draftBtn.addEventListener("click", () => {
   };
 
   loadLocalStorage([data]);
-  loadItems();
+  checkStatus();
   closeSidebar();
 });
 
@@ -141,7 +141,7 @@ saveBtn.addEventListener("click", () => {
   };
   if (checkForm("pending")) {
     loadLocalStorage([data]);
-    loadItems();
+    checkStatus();
     closeSidebar();
   } else {
     console.log("Can't");
@@ -191,7 +191,7 @@ editBtn.addEventListener("click", () => {
   });
   if (checkForm(status)) {
     localStorage.setItem("data", JSON.stringify(localData));
-    loadItems();
+    checkStatus();
     loadCard(localData.find((it) => it.projectDesc == data.projectDesc));
     closeSidebar();
   } else {
@@ -209,7 +209,7 @@ deleteBtn.addEventListener("click", () => {
   let data = JSON.parse(localStorage.getItem("data"));
   data = data.filter((it) => it.id != idText.textContent);
   localStorage.setItem("data", JSON.stringify(data));
-  loadItems();
+  checkStatus();
   mainWrapper.classList.remove("hidden");
   card.classList.remove("show");
 });
@@ -290,7 +290,7 @@ paidBtn.addEventListener("click", () => {
     return it;
   });
   localStorage.setItem("data", JSON.stringify(data));
-  loadItems();
+  checkStatus();
   loadCard(data.find((it) => it.id == idText.textContent));
 });
 
