@@ -691,6 +691,20 @@ body {
   align-items: center;
 }
 
+.error {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+.error__message {
+  color: var(--purple);
+  font-size: 32px;
+}
+.error.show {
+  display: flex;
+}
+
 .item {
   flex-direction: column;
   gap: 20px;

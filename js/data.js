@@ -30,6 +30,31 @@ const sidebarInputsWrapper = document.querySelector(".sidebar__inputs__wrapper")
 const filterBtn = document.querySelector(".main__header__control__select__header");
 const filterBody = document.querySelector(".main__header__control__select__body");
 const filterItems = document.querySelectorAll(".main__header__control__select__body__item");
+const error = document.querySelector(".error");
+
+function handleUrl() {
+  let url = new URL(window.location.href);
+  let params = new URLSearchParams(url.search);
+  let id = params.get("id");
+  if (id == null) {
+    loadItems();
+  } else {
+    let isIdFound = false;
+    let data = getLocalStorage();
+    data.forEach((item) => {
+      if (item.id == id) {
+        loadCard(item);
+        isIdFound = true;
+      }
+    });
+    if (isIdFound == false) {
+      mainWrapper.classList.add("hidden");
+      card.classList.remove("show");
+      error.classList.add("show");
+    }
+  }
+}
+handleUrl();
 
 draftBtn.addEventListener("click", () => {
   const items = document.querySelectorAll(".sidebar__group2");
@@ -200,8 +225,12 @@ editBtn.addEventListener("click", () => {
 });
 
 goBack.addEventListener("click", () => {
-  mainWrapper.classList.remove("hidden");
-  card.classList.remove("show");
+  let url = new URL(window.location.href);
+  let params = new URLSearchParams(url.search);
+  params.delete("id");
+  const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+  window.location.href = newUrl;
+  handleUrl();
 });
 
 deleteBtn.addEventListener("click", () => {
@@ -355,9 +384,12 @@ function loadItems(status = ["paid", "pending", "draft"]) {
                   </svg>
                 </div>`;
     bodyItem.addEventListener("click", () => {
-      mainWrapper.classList.add("hidden");
-      card.classList.add("show");
-      loadCard(item);
+      let url = new URL(window.location.href);
+      let params = new URLSearchParams(url.search);
+      params.set("id", item.id);
+      const newUrl =
+        window.location.protocol + "//" + window.location.host + window.location.pathname + "?" + params.toString();
+      window.location.href = newUrl;
     });
     status.forEach((x) => {
       if (x == item.status) {
@@ -368,6 +400,9 @@ function loadItems(status = ["paid", "pending", "draft"]) {
 }
 
 function loadCard(item) {
+  mainWrapper.classList.add("hidden");
+  error.classList.remove("show");
+  card.classList.add("show");
   let total = item.items.reduce((sum, curr) => {
     sum += curr.qty * curr.price;
     return sum;
