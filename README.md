@@ -1,4 +1,4 @@
-https://fuad2004.github.io/invoice/
+https://fuaddm.github.io/invoice/
 # Notes App 📝
 
 ### Task 🎯
